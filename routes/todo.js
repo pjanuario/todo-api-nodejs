@@ -64,7 +64,7 @@ module.exports = {
     },
 
     markCompleted: function(req, res, next) {
-      Todo.findOneAndUpdate({completed: false}, {$set:{completed:true}},function(err, doc){
+      Todo.findByIdAndUpdate(req.params.id, {$set:{completed:true}},{new:true},function(err, doc){
         if(err){
           console.log("Something wrong when updating data!");
         }
