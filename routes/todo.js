@@ -56,3 +56,18 @@ module.exports = {
             res.redirect('/todos');
         });
     },
+
+    viewOne: function(req, res){
+        Todo.find({ _id: req.params.id }, function(err, todo){
+            res.render('todo', { todo: todo[0] })
+        });
+    },
+
+    edit: function(req, res){
+        Todo.findOneAndUpdate( req.params.id, req.body, function(err, todo){
+
+            res.redirect('/todos');
+        });
+    }
+
+};
