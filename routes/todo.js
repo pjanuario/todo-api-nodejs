@@ -63,6 +63,15 @@ module.exports = {
         });
     },
 
+    markCompleted: function(req, res, next) {
+      Todo.findOneAndUpdate({completed: false}, {$set:{completed:true}},function(err, doc){
+        if(err){
+          console.log("Something wrong when updating data!");
+        }
+        res.redirect('/todos');
+      });
+    },
+
     edit: function(req, res){
         Todo.findOneAndUpdate( req.params.id, req.body, function(err, todo){
 
