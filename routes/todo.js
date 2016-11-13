@@ -72,6 +72,21 @@ module.exports = {
       });
     },
 
+    sortByDate: function(req,res){
+        console.log("sorting by date...")
+        Todo.find({}, null, {sort: {due_date: 1}}, function(err, docs) {
+          res.render('todos', { todos: docs, moment: moment });
+        });
+    },
+
+    sortByPriority: function(req,res){
+        console.log("sorting by priority")
+        Todo.find({}, null, {sort: {priority: 1}}, function(err, docs) {
+
+          res.render('todos', { todos: docs, moment: moment });
+        });
+    },
+
     edit: function(req, res){
         Todo.findOneAndUpdate( req.params.id, req.body, function(err, todo){
 
