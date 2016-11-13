@@ -4,7 +4,7 @@ var logger = require('morgan');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var flash = require('connect-flash');
+
 var expressValidator=require('express-validator');
 
 var favicon = require('serve-favicon');
@@ -70,10 +70,6 @@ module.exports = function(app, envConfig){
 //
 // app.use(flash());
 
-app.use(function(req,res,next){
-	res.locals.success_msg=req.flash("success_msg");
-	next();
-})
 
 
 
