@@ -88,10 +88,9 @@ module.exports = {
     },
 
     edit: function(req, res){
-        Todo.findOneAndUpdate( req.params.id, req.body, function(err, todo){
-
-            res.redirect('/todos');
-        });
+      Todo.findOneAndUpdate({ _id: req.params.id }, {content: req.body.content, priority: req.body.priority, due_date:req.body.due_date}, function(err, todo){
+          res.redirect('/todos');
+      });
     }
 
 };
