@@ -74,14 +74,14 @@ module.exports = {
 
     sortByDate: function(req,res){
         console.log("sorting by date...")
-        Todo.find({}, null, {sort: {due_date: 1}}, function(err, docs) {
+        Todo.find({name:req.user.name}, null, {sort: {due_date: 1}}, function(err, docs) {
           res.render('todos', { todos: docs, moment: moment, name:req.user.name });
         });
     },
 
     sortByPriority: function(req,res){
         console.log("sorting by priority")
-        Todo.find({}, null, {sort: {priority: 1}}, function(err, docs) {
+        Todo.find({name:req.user.name}, null, {sort: {priority: 1}}, function(err, docs) {
 
           res.render('todos', { todos: docs, moment: moment, name:req.user.name });
         });

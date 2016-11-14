@@ -16,8 +16,8 @@ var mongoose = require('mongoose'),
     });
 
 passport.use(new GithubStrategy({
-clientID: '1dfa8e055400327a808a',
-clientSecret: '86b571d4175924ed101e193ebbfc5dd096fb01f3',
+clientID: 'cb9fdbd2a04546f32122',
+clientSecret: '0c9bf53b7d0000cfeace77307f2351e4eed41b69',
 callbackURL: 'http://localhost:3000/auth/callback'
 },
 function(accessToken, refreshToken, profile, done) {
