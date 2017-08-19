@@ -1,0 +1,30 @@
+sudo: required
+
+services:
+  - docker
+  - mongodb
+
+language: node_js
+
+node_js:
+  - '8.4'
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+before_script:
+  - npm install -g gulp-cli
+  - npm install -g gulp-cli
+  - npm install --quiet
+
+script: gulp test
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - export REPO=armandorvila/todo-api
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
