@@ -25,10 +25,10 @@ before_script:
 script: gulp test
 
 after_success:
-  - docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_PASSWORD -p $DOCKER_HUB_USERNAME
+  - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
   - export REPO=armandorvila/todo-api
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker build -q -f Dockerfile -t $REPO:$COMMIT .
   - docker tag $REPO:$COMMIT $REPO:$TAG
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
