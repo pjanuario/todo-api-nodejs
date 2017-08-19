@@ -15,7 +15,7 @@ module.exports = mongoose.model('Task', new mongoose.Schema({
         trim: true,
         required: 'The description of the task is required.',
     },
-    dueDate: { type: Date, default: null },
+    duedate: { type: Date, default: null },
     priority: {
         type: String,
         enum: ['BLOCKER', 'HIGH', 'LOW', 'MINOR', 'TRIVIAL'],
