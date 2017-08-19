@@ -1,14 +1,14 @@
 FROM node:8
 
 # Install app dependencies
-COPY package.json /package.json
-RUN  npm install
+COPY package.json /src/package.json
+RUN cd /src; npm install
 
 # Bundle app source
-COPY . /
+COPY . /src
 
-ENV NODE_ENV=production
+ENV PORT=8081
 
-EXPOSE 8081
+EXPOSE  8081
 
-CMD ["node", /app/app.js"]
+CMD ["node", "/src/app/app.js"]

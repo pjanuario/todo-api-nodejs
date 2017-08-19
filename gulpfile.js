@@ -40,7 +40,8 @@ const test_env = {
   vars: {
     NODE_ENV: 'testing',
     MONGO_URL: 'mongodb://localhost/test_database',
-    PORT: 3001
+    PORT: 3001,
+    LOGGING_PATH: './todo-appi.log'
   }
 };
 
