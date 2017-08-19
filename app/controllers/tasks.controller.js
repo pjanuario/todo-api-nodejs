@@ -5,7 +5,8 @@ const Task = require("../models/tasks.model");
 
 class TasksController {
     find(req, res, next) {
-        Task.findOne({ _id: req.params.id }, { explicit: true }).exec()
+        Task.findOne({ _id: req.params.id }, { explicit: true })
+            .select('name description duedate priority completed').exec()
             .then((task) => {
                 if (task) {
                     logger.debug(`Task ${req.params.id} found.`)
@@ -25,7 +26,8 @@ class TasksController {
     list(req, res, next) {
         const { limit = 50, offset = 0 } = req.query;
 
-        Task.find({}).limit(parseInt(limit)).skip(parseInt(offset)).exec()
+        Task.find({}).limit(parseInt(limit)).skip(parseInt(offset))
+            .select('name description duedate priority completed').exec()
             .then((tasks) => { res.json(tasks) })
             .catch((err) => {
                 logger.error(`Error listing tasks: ${err.message}`);

@@ -13,6 +13,8 @@ var compression = require('compression');
 const health = require('./routes/health.routes');
 const docs = require('./routes/docs.routes');
 
+const tasks = require('./routes/task.routes');
+
 logger.info('Configuring express app');
 
 const app = express();
@@ -26,6 +28,8 @@ app.use(bodyParser.json());
 
 app.use('/docs', docs);
 app.use('/health', health);
+
+app.use('/tasks', tasks);
 
 require('./server.js')(app).start();
 

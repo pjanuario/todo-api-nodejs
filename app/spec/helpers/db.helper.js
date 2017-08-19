@@ -6,13 +6,13 @@ class TaskHelper {
 
     constructor(opts) {
         this.request = opts.request;
-        this.users = opts.data;
+        this.data = opts.data;
     }
 
     setup(done) {
         Task.remove({})
             .then(() => {
-                Task.create(this.tasks)
+                Task.create(this.data)
                     .then(() => { done() });
             });
     }
