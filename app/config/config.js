@@ -12,5 +12,9 @@ module.exports = {
     security: {
         jwtSecret: process.env.JWT_SECRET,
         jwtExpiration: process.env.JWT_EXPIRATION
+    },
+    logging: {
+        file: process.env.LOGGING_FILE,
+        level: process.env.LOGGING_LEVEL,
     }
 };

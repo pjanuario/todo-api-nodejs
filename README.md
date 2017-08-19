@@ -1,3 +1,6 @@
+
+[![Build Status](https://secure.travis-ci.org/armandorvila/todo-api-nodejs.png)](http://travis-ci.org/armandorvila/todo-api-nodejs)
+
 # TODO REST API
 
 Create a REST API to manage user tasks list.
@@ -22,5 +25,3 @@ To implement the REST API just fork the repository and open a new pull request f
 9. As a user I should be able to set a item as completed.
 10. As a user I should be able to assign a task to another user using github id.
 11. As a user I should be able to list tasks assigned to a github user
-
-**It's more important to build less features and complete then build incomplete ones.**

@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/armandorvila/users-service-nodejs.git"
+    "url": "git+https://github.com/armandorvila/todo-api-nodejs.git"
   },
   "keywords": [
     "events"
