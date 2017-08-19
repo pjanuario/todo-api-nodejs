@@ -1,7 +1,5 @@
 
-[![Build Status](https://secure.travis-ci.org/armandorvila/todo-api-nodejs.png)](http://travis-ci.org/armandorvila/todo-api-nodejs)
-
-Helth Check: http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/health
+[![Build Status](https://secure.travis-ci.org/armandorvila/todo-api-nodejs.png)](http://travis-ci.org/armandorvila/todo-api-nodejs) http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/health
 
 # TODO REST API
 
