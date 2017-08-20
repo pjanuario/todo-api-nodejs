@@ -1,5 +1,11 @@
 
-[![Build Status](https://secure.travis-ci.org/armandorvila/todo-api-nodejs.png)](http://travis-ci.org/armandorvila/todo-api-nodejs) http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/health
+[![Build Status](https://secure.travis-ci.org/armandorvila/todo-api-nodejs.png)](http://travis-ci.org/armandorvila/todo-api-nodejs) 
+
+# Run it with docker:
+1. docker pull armandorvila/todo-api
+2. docker run -d -p<host_free_port>:8081 armandorvila/todo-api:latest
+# Try it online
+* http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/health
 
 # TODO REST API
 
@@ -14,8 +20,8 @@ To implement the REST API just fork the repository and open a new pull request f
 
 # Feature list
 
-1. As a user I should be able to add a new item.
-2. As a user I should list my todo items.
+1. As a user I should list my todo items.
+2. As a user I should be able to add a new item.
 3. As a user I should be able to remove a new item.
 4. As a user I should be able to modify a existent item.
 5. As a user I should be able to set a priority on a item.
