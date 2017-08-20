@@ -19,6 +19,17 @@ router.route('/:id').get(TaskCtrl.find);
   /**
    * @swagger
    * /:
+   *   post:
+   *     description: Set a given task as completed.
+   *     responses:
+   *       200:
+   *         description: A task json object.
+   */
+router.route('/:id/complete').post(TaskCtrl.complete);
+
+  /**
+   * @swagger
+   * /:
    *   get:
    *     description: Returns all tasks applying filtering (offset, limit).
    *     responses:
