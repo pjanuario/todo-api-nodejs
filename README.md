@@ -17,8 +17,10 @@
 2. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/tasks
 3. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/tasks/59993fd5f36d286f16670832
 
-# Swagger Docs
-http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/docs
+# Docs
+Postman: https://documenter.getpostman.com/view/2598716/kpn-todo-api/6n8wrPP
+Swagger spec: http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/docs
+
 
 # TODO REST API
 
