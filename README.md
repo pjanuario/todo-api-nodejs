@@ -17,6 +17,9 @@
 2. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/tasks
 3. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/tasks/59993fd5f36d286f16670832
 
+# Swagger Docs
+http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/docs
+
 # TODO REST API
 
 Create a REST API to manage user tasks list.
