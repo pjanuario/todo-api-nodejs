@@ -67,7 +67,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.json, data[1]);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should send 404 on user not found', function (done) {
@@ -85,7 +85,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.status, 404);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should send 500 finding user', function (done) {
@@ -103,7 +103,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.status, 500);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should add a new user and send success', function (done) {

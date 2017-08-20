@@ -34,6 +34,23 @@ class TasksController {
                 res.status(500).json({ success: false, message: err.message });
             });
     }
+
+    create(req, res, next) {
+        const task = new Task({
+            name: req.body.name,
+            description: req.body.description,
+            duedate: req.body.duedate,
+            priority: req.body.priority,
+            completed: req.body.completed
+        });
+
+        task.save().then((task) => {
+            res.json({ success: true, id: task.id })
+        }).catch((err) => {
+            logger.error(`Error creating task ${task.name}: ${err.message}`);
+            res.status(400).json({ success: false, message: err.message });
+        });
+    }
 };
 
 module.exports = new TasksController();

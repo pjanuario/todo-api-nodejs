@@ -8,7 +8,7 @@ const { mockRes } = require('sinon-express-mock');
 const TaskCtrl = require('../../controllers/tasks.controller');
 const Task = require('../../models/tasks.model');
 
-const data = require('../data/tasks.data');
+const tasks = require('../data/tasks.data');
 
 describe('TaskCtrl', function () {
 
@@ -23,7 +23,7 @@ describe('TaskCtrl', function () {
     });
 
     it('should send all tasks', function (done) {
-        TaskMock.expects('find').withArgs({}).chain('limit').chain('exec').resolves(data);
+        TaskMock.expects('find').withArgs({}).chain('limit').chain('exec').resolves(tasks);
 
         const req = { params: {}, query: {} };
         const res = mockRes();
@@ -33,13 +33,13 @@ describe('TaskCtrl', function () {
 
         setTimeout(() => {
             TaskMock.verify();
-            sinon.assert.calledWith(res.json, data);
+            sinon.assert.calledWith(res.json, tasks);
             done();
         }, 500);
     });
 
     it('should fail sending all tasks', function (done) {
-        TaskMock.expects('find').withArgs({}).chain('limit').chain('exec').rejects( new Error('Test forced error'));
+        TaskMock.expects('find').withArgs({}).chain('limit').chain('exec').rejects(new Error('Test forced error'));
 
         const req = { params: {}, query: { limit: "-1" } };
         const res = mockRes()
@@ -55,9 +55,9 @@ describe('TaskCtrl', function () {
     });
 
     it('should send one task', function (done) {
-        TaskMock.expects('findOne').withArgs({ _id: data[1]._id }).chain('exec').resolves(data[1]);
+        TaskMock.expects('findOne').withArgs({ _id: tasks[1]._id }).chain('exec').resolves(tasks[1]);
 
-        const req = { params: { id: data[1]._id } };
+        const req = { params: { id: tasks[1]._id } };
         const res = mockRes();
         const next = {};
 
@@ -65,7 +65,7 @@ describe('TaskCtrl', function () {
 
         setTimeout(() => {
             TaskMock.verify();
-            sinon.assert.calledWith(res.json, data[1]);
+            sinon.assert.calledWith(res.json, tasks[1]);
             done();
         }, 500);
     });
@@ -102,6 +102,56 @@ describe('TaskCtrl', function () {
         setTimeout(() => {
             TaskMock.verify();
             sinon.assert.calledWith(res.status, 500);
+            done();
+        }, 500);
+    });
+
+    it('should add a new task and send success', function (done) {
+        TaskMock = sinon.mock(Task.prototype);
+        TaskMock.expects('save').resolves(tasks[1]);
+
+        const req = { body: tasks[1] };
+        const res = mockRes();
+        const next = {};
+
+        TaskCtrl.create(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.json, { success: true, id: tasks[1].id });
+            done();
+        }, 500);
+    });
+
+    it('should fail to add a task and send 400', function (done) {
+        TaskMock = sinon.mock(Task.prototype);
+        TaskMock.expects('save').rejects(new Error('Validation Error', 'Test forced error'));
+
+        const req = { body: { password: 'secret' } };
+        const res = mockRes();
+        const next = {};
+
+        TaskCtrl.create(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.status, 400);
+            done();
+        }, 500);
+    });
+
+    it('should fail to add a task without password and send 400', function (done) {
+        TaskMock = sinon.mock(Task.prototype);
+
+        const req = { body: {} };
+        const res = mockRes();
+        const next = {};
+
+        TaskCtrl.create(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.status, 400);
             done();
         }, 500);
     });
