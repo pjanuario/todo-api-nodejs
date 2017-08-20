@@ -51,6 +51,24 @@ class TasksController {
             res.status(400).json({ success: false, message: err.message });
         });
     }
+
+    deleteById(req, res, next) {
+        const {id} = req.params;
+
+        Task.findOneAndRemove({ _id: id })
+            .then((task) => {
+                if (task) {
+                    res.json({ success: true, id: task.id });
+                } else {
+                    logger.debug(`Task ${id} not found.`);
+                    res.status(404).json({ success: false, message: `Task ${id} not found.` });
+                }
+            })
+            .catch((err) => {
+                logger.error(`Error deleting user ${id}`);
+                res.status(500).json({ success: false, message: err.message });
+            });
+    }
 };
 
 module.exports = new TasksController();

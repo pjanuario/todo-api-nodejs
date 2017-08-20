@@ -155,4 +155,56 @@ describe('TaskCtrl', function () {
             done();
         }, 500);
     });
+
+    it('should delete a task and send success', function (done) {
+        TaskMock.expects('findOneAndRemove').withArgs({ _id: tasks[1]._id }).resolves(tasks[1]);
+
+        const req = { params: {id: tasks[1]._id} };
+        const res = mockRes();
+        const next = {};
+
+        TaskCtrl.deleteById(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.json, { success: true, id: tasks[1].id });
+            done();
+        }, 500);
+    });
+
+    it('should not delete a task and send 404', function (done) {
+        const wrongId = '59932f056451ff00011dd462';
+
+        TaskMock.expects('findOneAndRemove').withArgs({ _id: wrongId }).resolves(null);
+
+        const req = { params: { id: wrongId } };
+        const res = mockRes()
+        const next = {};
+
+        TaskCtrl.deleteById(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.status, 404);
+            done();
+        }, 500);
+    });
+
+    it('should not delete a task and send 500', function (done) {
+        const wrongId = 'nonvalidObjectId';
+
+        TaskMock.expects('findOneAndRemove').withArgs({ _id: wrongId }).rejects(new Error());
+
+        const req = { params: { id: wrongId } };
+        const res = mockRes()
+        const next = {};
+
+        TaskCtrl.deleteById(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.status, 500);
+            done();
+        }, 500);
+    });
 });
