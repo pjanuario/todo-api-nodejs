@@ -82,6 +82,51 @@ describe('task routes', function () {
         });
     });
 
+    it('should return a 200 on GET /tasks?limit=1', function (done) {
+        auth.login(users[0]).then((res) => {
+            request.get('/tasks').set('x-access-token', res.body.token)
+                .query({ limit: 1 })
+                .expect(200).expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body.length).to.be.equal(1);
+                    expect(res.body[0]).have.property('name');
+                    expect(res.body[0].name).to.be.equal(tasks[0].name);
+                    done();
+                });
+        });
+    });
+
+    it('should return a 200 on GET /tasks?limit=1&offset=1', function (done) {
+        auth.login(users[0]).then((res) => {
+            request.get('/tasks').set('x-access-token', res.body.token)
+                .query({ limit: 1, offset: 1 })
+                .expect(200).expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body.length).to.be.equal(1);
+                    expect(res.body[0]).have.property('name');
+                    expect(res.body[0].name).to.be.equal(tasks[1].name);
+                    done();
+                });
+        });
+    });
+
+    it('should return a 200 on GET /tasks?sort=-priority', function (done) {
+        auth.login(users[0]).then((res) => {
+            request.get('/tasks').set('x-access-token', res.body.token)
+                .query({ sort: '-priority' })
+                .expect(200).expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body.length).to.be.equal(2);
+                    expect(res.body[0]).have.property('name');
+                    expect(res.body[0].name).to.be.equal(tasks[1].name);
+                    done();
+                });
+        });
+    });
+
     it('should return a 403 on GET /tasks - wrong token', function (done) {
         request.get('/tasks').set('x-access-token', 'wrongtoken')
             .expect(403).expect('Content-Type', /json/)

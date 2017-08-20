@@ -21,6 +21,7 @@ module.exports = mongoose.model('Task', new mongoose.Schema({
     },
     priority: {
         type: String,
+        uppercase: true,
         enum: ['BLOCKER', 'HIGH', 'LOW', 'MINOR', 'TRIVIAL'],
         default: 'LOW'
     },
