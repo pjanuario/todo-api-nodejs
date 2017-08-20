@@ -1,5 +1,5 @@
 {
-  "name": "users-service",
+  "name": "nodejs-todo-api",
   "version": "1.0.0",
   "description": "Todo Rest API.",
   "main": "app.js",

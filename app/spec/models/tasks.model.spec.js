@@ -9,6 +9,7 @@ describe('Task', function () {
         const task = new Task({
             completed: false,
             description: 'any',
+            duedate: Date.now(),
             // name: 'any',
             priority: 'HIGH',
         });
@@ -22,6 +23,7 @@ describe('Task', function () {
     it('should be invalid if description is empty', function (done) {
         const task = new Task({
             completed: false,
+            duedate: Date.now(),
             //description: 'any',
             name: 'any',
             priority: 'HIGH',
@@ -37,8 +39,9 @@ describe('Task', function () {
         const task = new Task({
             completed: false,
             description: 'any',
+            duedate: Date.now(),
             name: 'any',
-            priority: 'low', //Should be LOW
+            priority: 'INVALIDPRIORITY',
         });
 
         task.validate(function (err) {
@@ -50,8 +53,9 @@ describe('Task', function () {
     it('should have default completed false', function (done) {
         const task = new Task({
             description: 'any',
+            duedate: Date.now(),
             name: 'any',
-            priority: 'MINOR', //Should be LOW
+            priority: 'LOW',
         });
 
         task.validate(function (err) {

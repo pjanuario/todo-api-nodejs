@@ -1,17 +1,16 @@
 'use strict';
 
-const pjson  = require('./../../package.json');
+const pjson = require('./../../package.json');
 const swaggerJSDoc = require('swagger-jsdoc');
 
 const spec = swaggerJSDoc({
   swaggerDefinition: {
     info: {
-      title: 'Users Service',
-      version: '1.0.0-1',
+      title: pjson.name,
+      version: pjson.version,
     },
   },
-  apis: ['app/routes/auth.routes.js', 'app/routes/health.routes.js', 'app/routes/users.routes.js'],
-  host: 'http://api.mybudgi.io'
+  apis: ['app/routes/health.routes.js', 'src/app/routes/health.routes.js', 'app/routes/task.routes.js', 'src/app/routes/task.routes.js'],
 });
 
 module.exports = spec;

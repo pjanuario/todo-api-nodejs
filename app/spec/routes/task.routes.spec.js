@@ -48,7 +48,6 @@ describe('task routes', function () {
                 expect(res.body.success).to.be.equal(false);
 
                 done();
-
             })
     });
 

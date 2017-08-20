@@ -1,9 +1,9 @@
 'use strict';
 
-var app = require('../../app');
-var request = require('supertest').agent(app.listen());
+const app = require('../../app');
+const request = require('supertest').agent(app.listen());
 
-var { expect } = require('chai');
+const { expect } = require('chai');
 
 describe('docs routes', function () {
     it('should return a 200 on GET /users/docs', function (done) {
