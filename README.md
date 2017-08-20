@@ -1,14 +1,14 @@
 
 [![Build Status](https://secure.travis-ci.org/armandorvila/todo-api-nodejs.png)](http://travis-ci.org/armandorvila/todo-api-nodejs) 
 
-# Build sources
+# Build
 1. git clone https://github.com/armandorvila/todo-api-nodejs
 2. cd todo-api-nodejs
 3. npm install
 4. npm test
 5. npm start
 
-# Run it with docker
+# Run
 1. docker pull armandorvila/todo-api
 2. docker run -d -p<host_free_port>:8081 armandorvila/todo-api:latest
 
@@ -22,7 +22,6 @@
 3. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/tasks/59993fd5f36d286f16670832
 
 # Security
-
 Both users and tasks endpoints are secured, so you need to set the x-access-token header with a valid token on every request.
 In order to get token, you have to do a POST request to the /auth endpoint, providing your email and your password as a JSON object.
 
