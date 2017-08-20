@@ -4,7 +4,7 @@ module.exports = [{
     _id: '59945ddeca729e3398985ea7',
     name: 'Test 1',
     description: 'Test Task 1',
-    duedate: Date.now(),
+    duedate: '2016-12-12T00:00:00.000Z',
     priority: 'HIGH',
 },
 {

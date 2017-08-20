@@ -127,6 +127,21 @@ describe('task routes', function () {
         });
     });
 
+    it('should return a 200 on GET /tasks?sort=-duedate', function (done) {
+        auth.login(users[0]).then((res) => {
+            request.get('/tasks').set('x-access-token', res.body.token)
+                .query({ sort: '-priority' })
+                .expect(200).expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body.length).to.be.equal(2);
+                    expect(res.body[0]).have.property('name');
+                    expect(res.body[0].name).to.be.equal(tasks[1].name);
+                    done();
+                });
+        });
+    });
+
     it('should return a 403 on GET /tasks - wrong token', function (done) {
         request.get('/tasks').set('x-access-token', 'wrongtoken')
             .expect(403).expect('Content-Type', /json/)
