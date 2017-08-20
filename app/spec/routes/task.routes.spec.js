@@ -4,7 +4,8 @@ const app = require('../../app');
 const request = require('supertest').agent(app.listen());
 
 const data = require('../data/tasks.data');
-const db = require('../helpers/db.helper')({ request, data });
+const Task = require('../../models/tasks.model');
+const db = require('../helpers/db.helper')(Task , data);
 
 const { expect } = require('chai');
 
@@ -25,7 +26,7 @@ describe('task routes', function () {
             .expect(200).expect('Content-Type', /json/)
             .end((err, res) => {
 
-                expect(err).not.to.exist;
+                expect(err).to.not.exist;
                 expect(res.body).have.property('_id');
                 expect(res.body).have.property('name');
                 expect(res.body).have.property('description');
@@ -43,7 +44,7 @@ describe('task routes', function () {
         request.get(`/tasks/${id}`)
             .expect(404).expect('Content-Type', /json/)
             .end((err, res) => {
-                expect(err).not.to.exist;
+                 expect(err).to.not.exist;
                 expect(res.body).have.property('success');
                 expect(res.body.success).to.be.equal(false);
 
@@ -57,7 +58,7 @@ describe('task routes', function () {
             .expect(200).expect('Content-Type', /json/)
             .end((err, res) => {
 
-                expect(err).not.to.exist;
+                expect(err).to.not.exist;
                 expect(res.body.length).to.be.equal(2);
                 expect(res.body[0]).have.property('_id');
                 expect(res.body[0]).have.property('name');

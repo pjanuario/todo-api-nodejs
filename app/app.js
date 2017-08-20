@@ -14,6 +14,7 @@ const health = require('./routes/health.routes');
 const docs = require('./routes/docs.routes');
 
 const tasks = require('./routes/task.routes');
+const users = require('./routes/user.routes');
 
 logger.info('Configuring express app');
 
@@ -29,6 +30,7 @@ app.use(bodyParser.json());
 app.use('/docs', docs);
 app.use('/health', health);
 
+app.use('/users', users);
 app.use('/tasks', tasks);
 
 require('./server.js')(app).start();

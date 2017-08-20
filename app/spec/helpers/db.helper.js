@@ -1,25 +1,23 @@
 'use strict';
 
-const Task = require('../../models/tasks.model');
+class DbHelper {
 
-class TaskHelper {
-
-    constructor(opts) {
-        this.request = opts.request;
-        this.data = opts.data;
+    constructor(Model, data) {
+        this.Model = Model;
+        this.data = data;
     }
 
     setup(done) {
-        Task.remove({})
+        this.Model.remove({})
             .then(() => {
-                Task.create(this.data)
+                this.Model.create(this.data)
                     .then(() => { done() });
             });
     }
 
     cleanup(done) {
-        Task.remove({}).then(() => { done();});
+        this.Model.remove({}).then(() => { done(); });
     }
 }
 
-module.exports = opts => { return new TaskHelper(opts) };
+module.exports = (Model, data) => { return new DbHelper(Model, data) };

@@ -35,7 +35,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.json, data);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should fail sending all users', function (done) {
@@ -51,7 +51,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.status, 500);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should send one user', function (done) {
@@ -120,7 +120,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.json, { success: true, id: data[1].id });
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should fail to add a user and send 400', function (done) {
@@ -138,7 +138,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.status, 400);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should fail to add a user without password and send 400', function (done) {
@@ -154,7 +154,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.status, 400);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should delete a user and send success', function (done) {
@@ -170,7 +170,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.json, { success: true, id: data[1].id });
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should not delete a user and send 404', function (done) {
@@ -188,7 +188,7 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.status, 404);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should not delete a user and send 500', function (done) {
@@ -207,6 +207,6 @@ describe('UserCtrl', function () {
             UserMock.verify();
             sinon.assert.calledWith(res.status, 500);
             done();
-        }, 600);
+        }, 500);
     });
 });

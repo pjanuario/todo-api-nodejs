@@ -35,7 +35,7 @@ describe('TaskCtrl', function () {
             TaskMock.verify();
             sinon.assert.calledWith(res.json, data);
             done();
-        }, 900);
+        }, 500);
     });
 
     it('should fail sending all tasks', function (done) {
@@ -51,7 +51,7 @@ describe('TaskCtrl', function () {
             TaskMock.verify();
             sinon.assert.calledWith(res.status, 500);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should send one task', function (done) {
@@ -67,7 +67,7 @@ describe('TaskCtrl', function () {
             TaskMock.verify();
             sinon.assert.calledWith(res.json, data[1]);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should send 404 on task not found', function (done) {
@@ -85,7 +85,7 @@ describe('TaskCtrl', function () {
             TaskMock.verify();
             sinon.assert.calledWith(res.status, 404);
             done();
-        }, 600);
+        }, 500);
     });
 
     it('should send 500 on find task failure', function (done) {
@@ -103,6 +103,6 @@ describe('TaskCtrl', function () {
             TaskMock.verify();
             sinon.assert.calledWith(res.status, 500);
             done();
-        }, 600);
+        }, 500);
     });
 });
