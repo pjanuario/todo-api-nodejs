@@ -16,7 +16,7 @@ module.exports = mongoose.model('Task', new mongoose.Schema({
         required: 'The description of the task is required.',
     },
     duedate: {
-        type: Date, 
+        type: Date,
         default: null
     },
     priority: {
@@ -28,5 +28,9 @@ module.exports = mongoose.model('Task', new mongoose.Schema({
     completed: {
         type: Boolean,
         default: false
-    }
+    },
+    asignee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
 }));

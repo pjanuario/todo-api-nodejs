@@ -82,7 +82,7 @@ describe('task routes', function () {
         });
     });
 
-    it('should return a 200 on GET /tasks?limit=1', function (done) {
+    it('should return a 200 on GET /tasks?limit=1&sort=name', function (done) {
         auth.login(users[0]).then((res) => {
             request.get('/tasks').set('x-access-token', res.body.token)
                 .query({ limit: 1 })
@@ -97,7 +97,7 @@ describe('task routes', function () {
         });
     });
 
-    it('should return a 200 on GET /tasks?limit=1&offset=1', function (done) {
+    it('should return a 200 on GET /tasks?limit=1&offset=1&sort=name', function (done) {
         auth.login(users[0]).then((res) => {
             request.get('/tasks').set('x-access-token', res.body.token)
                 .query({ limit: 1, offset: 1 })
