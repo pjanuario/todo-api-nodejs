@@ -75,7 +75,14 @@ class TasksController {
         const updates = req.body;
 
         Task.update({ "_id": id }, updates).then((count) => {
-            res.status(202).json({ success: true, message: `Modified ${count} documents.` });
+
+            if (count.n == 0) {
+                res.status(404).json({ success: false, message: `Modified ${count.n} documents.` });
+            }
+            else {
+                res.status(202).json({ success: true, message: `Modified ${count.n} documents.` });
+            }
+
         }).catch((err) => {
             logger.error(`Error updating task: ${id}`);
             res.status(500).json({ success: false, message: `Error updating task: ${id}` });

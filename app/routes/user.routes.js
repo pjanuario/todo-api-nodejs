@@ -33,8 +33,8 @@ router.route('/').get(UsersCtrl.list);
    *   post:
    *     description: Creates a new user in the system.
    *     responses:
-   *       200:
-   *         description: Returns 200 with sucess if the user was created.
+   *       201:
+   *         description: Returns 201 with sucess if the user was created.
    */
 router.route('/').post(UsersCtrl.create);
 
@@ -44,8 +44,8 @@ router.route('/').post(UsersCtrl.create);
    *   delete:
    *     description: Deletes a user from the system.
    *     responses:
-   *       200:
-   *         description: Returns 200 with sucess if the user was deleted.
+   *       202:
+   *         description: Returns 202 with sucess if the user was deleted.
    */
 router.route('/:id').delete(UsersCtrl.deleteById);
 

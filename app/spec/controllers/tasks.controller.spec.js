@@ -214,9 +214,9 @@ describe('TaskCtrl', function () {
             description: 'A really boring task.'
         }
 
-        TaskMock.expects('update').withArgs({ _id: id}, updates).resolves(1);
+        TaskMock.expects('update').withArgs({ _id: id }, updates).resolves({ n: 1 });
 
-        const req = { params: { id: id}, body: updates};
+        const req = { params: { id: id }, body: updates };
         const res = mockRes();
         const next = {};
 
@@ -225,6 +225,48 @@ describe('TaskCtrl', function () {
         setTimeout(() => {
             TaskMock.verify();
             sinon.assert.calledWith(res.json, { success: true, message: "Modified 1 documents." });
+            done();
+        }, 500);
+    });
+
+    it('should not modify a task and send 404', function (done) {
+        const id = tasks[1]._id;
+        const updates = {
+            description: 'A really boring task.'
+        }
+
+        TaskMock.expects('update').withArgs({ _id: id }, updates).resolves({ n: 0 });
+
+        const req = { params: { id: id }, body: updates };
+        const res = mockRes();
+        const next = {};
+
+        TaskCtrl.updateById(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.json, { success: false, message: "Modified 0 documents." });
+            done();
+        }, 500);
+    });
+
+    it('should not modify a task and send 500', function (done) {
+        const id = tasks[1]._id;
+        const updates = {
+            description: 'A really boring task.'
+        }
+
+        TaskMock.expects('update').withArgs({ _id: id }, updates).rejects(new Error('Test forced error.'));
+
+        const req = { params: { id: id }, body: updates };
+        const res = mockRes()
+        const next = {};
+
+        TaskCtrl.updateById(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.status, 500);
             done();
         }, 500);
     });

@@ -152,4 +152,50 @@ describe('task routes', function () {
                 });
         });
     });
+
+    it('should return a 202 on PUT /tasks', function (done) {
+        const id = tasks[0]._id;
+        const updates = {
+            description: 'A really boring task.'
+        }
+
+        auth.login(users[0]).then((res) => {
+
+            const { token } = res.body;
+
+            request.put(`/tasks/${id}`).set('x-access-token', token)
+                .send(updates).expect(202).end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body).have.property('success');
+                    expect(res.body.success).to.be.equal(true);
+
+                    request.get(`/tasks/${id}`).set('x-access-token', token).expect(200).end((err, res) => {
+                        expect(err).to.not.exist;
+                        expect(res.body).have.property('description');
+                        expect(res.body.description).to.be.equal(updates.description);
+                        done();
+                    });
+                });
+        });
+    });
+
+    it('should return a 404 on PUT /tasks', function (done) {
+        const id = '59943ddeca729e3398985ea7';
+        const updates = {
+            description: 'A really boring task.'
+        }
+
+        auth.login(users[0]).then((res) => {
+
+            const { token } = res.body;
+
+            request.put(`/tasks/${id}`).set('x-access-token', token)
+                .send(updates).expect(404).end((err, res) => {
+                    expect(res.body).have.property('success');
+                    expect(res.body.success).to.be.equal(false);
+
+                    done();
+                });
+        });
+    });
 });

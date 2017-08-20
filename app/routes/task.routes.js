@@ -34,8 +34,8 @@ router.route('/').get(TaskCtrl.list);
    *   post:
    *     description: Creates a new task in the system.
    *     responses:
-   *       200:
-   *         description: Returns 200 with sucess if the task was created.
+   *       201:
+   *         description: Returns 201 with sucess if the task was created.
    */
 router.route('/').post(TaskCtrl.create);
 
@@ -45,9 +45,20 @@ router.route('/').post(TaskCtrl.create);
    *   delete:
    *     description: Deletes a task from the system.
    *     responses:
-   *       200:
-   *         description: Returns 200 with sucess if the task was deleted.
+   *       202:
+   *         description: Returns 202 with sucess if the task was deleted.
    */
 router.route('/:id').delete(TaskCtrl.deleteById);
+
+  /**
+   * @swagger
+   * /:
+   *   put:
+   *     description: Update a task from the system.
+   *     responses:
+   *       202:
+   *         description: Returns 202 with sucess if the task was modified.
+   */
+router.route('/:id').put(TaskCtrl.updateById);
 
 module.exports = router;
