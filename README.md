@@ -12,7 +12,7 @@
 1. docker pull armandorvila/todo-api
 2. docker run -d -p<host_free_port>:8081 armandorvila/todo-api:latest
 
-# Try it online
+# AWS deployed endpoints
 1. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/health
 2. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/tasks
 3. http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/tasks/59993fd5f36d286f16670832
