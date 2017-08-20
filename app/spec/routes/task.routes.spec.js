@@ -130,13 +130,27 @@ describe('task routes', function () {
     it('should return a 200 on GET /tasks?sort=-duedate', function (done) {
         auth.login(users[0]).then((res) => {
             request.get('/tasks').set('x-access-token', res.body.token)
-                .query({ sort: '-priority' })
+                .query({ sort: '-duedate' })
                 .expect(200).expect('Content-Type', /json/)
                 .end((err, res) => {
                     expect(err).to.not.exist;
                     expect(res.body.length).to.be.equal(2);
                     expect(res.body[0]).have.property('name');
                     expect(res.body[0].name).to.be.equal(tasks[1].name);
+                    done();
+                });
+        });
+    });
+
+    it('should return a 200 on GET /tasks?completed=true', function (done) {
+        auth.login(users[0]).then((res) => {
+            request.get('/tasks').set('x-access-token', res.body.token)
+                .query({ completed: true }).expect(200)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body.length).to.be.equal(1);
+                    expect(res.body[0]).have.property('completed');
+                    expect(res.body[0].completed).to.be.equal(true);
                     done();
                 });
         });

@@ -25,8 +25,14 @@ class TasksController {
 
     list(req, res, next) {
         const { limit = 50, offset = 0, sort = null } = req.query;
+        
+        let filter = {};
 
-        Task.find({}).limit(parseInt(limit)).skip(parseInt(offset)).sort(sort)
+        if (req.query.completed != undefined) {
+            filter = { completed: req.query.completed };
+        }
+
+        Task.find(filter).limit(parseInt(limit)).skip(parseInt(offset)).sort(sort)
             .select('name description duedate priority completed').exec()
             .then((tasks) => { res.json(tasks) })
             .catch((err) => {

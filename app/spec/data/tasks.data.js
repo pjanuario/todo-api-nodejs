@@ -13,4 +13,5 @@ module.exports = [{
     description: 'Test Task 2',
     duedate: Date.now(),
     priority: 'TRIVIAL',
+    completed: true
 }];
