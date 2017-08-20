@@ -1,7 +1,14 @@
 
 [![Build Status](https://secure.travis-ci.org/armandorvila/todo-api-nodejs.png)](http://travis-ci.org/armandorvila/todo-api-nodejs) 
 
-# Run it with docker:
+# Build sources
+1. git clone https://github.com/armandorvila/todo-api-nodejs
+2. cd todo-api-nodejs
+3. npm install
+4. npm test
+5. npm start
+
+# Run it with docker
 1. docker pull armandorvila/todo-api
 2. docker run -d -p<host_free_port>:8081 armandorvila/todo-api:latest
 # Try it online
