@@ -5,8 +5,9 @@
 1. git clone https://github.com/armandorvila/todo-api-nodejs
 2. cd todo-api-nodejs
 3. npm install
+4. mongod (for integration tests)
 4. npm test
-5. npm start
+5. npm start (db is configured against mongolab)
 
 # Run
 1. docker pull armandorvila/todo-api
