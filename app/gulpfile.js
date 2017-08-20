@@ -47,7 +47,7 @@ const test_env = {
 
 gulp.task('test', ['pre-test'], () => {
   env(test_env);
-  return gulp.src('app/spec/**/*.spec.js')
+  return gulp.src('app/spec/**/task.routes.spec.js')
     .pipe(mocha({ bail: false, reporter: 'spec' })).on('error', handleError)
     .pipe(istanbul.writeReports().on('error', console.error))
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }).on('error', console.error))

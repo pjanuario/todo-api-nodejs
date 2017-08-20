@@ -12,9 +12,11 @@ var compression = require('compression');
 
 const health = require('./routes/health.routes');
 const docs = require('./routes/docs.routes');
-
+const auth = require('./routes/auth.routes');
 const tasks = require('./routes/task.routes');
 const users = require('./routes/user.routes');
+
+const autzFilter = require("./middleware/autz.filter");
 
 logger.info('Configuring express app');
 
@@ -29,6 +31,9 @@ app.use(bodyParser.json());
 
 app.use('/docs', docs);
 app.use('/health', health);
+app.use('/auth', auth);
+
+app.use('/', autzFilter); //Only applies to the routes used after this line.
 
 app.use('/users', users);
 app.use('/tasks', tasks);

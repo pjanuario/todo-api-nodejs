@@ -28,7 +28,7 @@ gulp.task('run', () => {
 });
 
 gulp.task('pre-test', () => {
-  return gulp.src(['app/**/*.js']).pipe(istanbul()).pipe(istanbul.hookRequire());
+  return gulp.src(['app/**/*.js', '!app/spec/**/*.js']).pipe(istanbul()).pipe(istanbul.hookRequire());
 });
 
 function handleError(err) {

@@ -2,22 +2,33 @@
 
 class DbHelper {
 
-    constructor(Model, data) {
-        this.Model = Model;
-        this.data = data;
+    setupAll(User, users, Model, data, done) {
+        User.remove({})
+            .then(() => {
+                User.create(users)
+                    .then(() => {
+                        this.setup(Model, data, done);
+                    });
+            });
     }
 
-    setup(done) {
-        this.Model.remove({})
+    setup(Model, data, done) {
+        Model.remove({})
             .then(() => {
-                this.Model.create(this.data)
+                Model.create(data)
                     .then(() => { done() });
             });
     }
 
-    cleanup(done) {
-        this.Model.remove({}).then(() => { done(); });
+    cleanup(Model, done) {
+        Model.remove({}).then(() => { done(); });
+    }
+
+    cleanupAll(User, Model, done) {
+        User.remove({}).then(() => {
+            this.cleanup(Model, done);
+            });
     }
 }
 
-module.exports = (Model, data) => { return new DbHelper(Model, data) };
+module.exports = new DbHelper();
