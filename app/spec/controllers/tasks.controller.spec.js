@@ -159,7 +159,7 @@ describe('TaskCtrl', function () {
     it('should delete a task and send success', function (done) {
         TaskMock.expects('findOneAndRemove').withArgs({ _id: tasks[1]._id }).resolves(tasks[1]);
 
-        const req = { params: {id: tasks[1]._id} };
+        const req = { params: { id: tasks[1]._id } };
         const res = mockRes();
         const next = {};
 
@@ -204,6 +204,27 @@ describe('TaskCtrl', function () {
         setTimeout(() => {
             TaskMock.verify();
             sinon.assert.calledWith(res.status, 500);
+            done();
+        }, 500);
+    });
+
+    it('should modify a task and send success', function (done) {
+        const id = tasks[1]._id;
+        const updates = {
+            description: 'A really boring task.'
+        }
+
+        TaskMock.expects('update').withArgs({ _id: id}, updates).resolves(1);
+
+        const req = { params: { id: id}, body: updates};
+        const res = mockRes();
+        const next = {};
+
+        TaskCtrl.updateById(req, res, next);
+
+        setTimeout(() => {
+            TaskMock.verify();
+            sinon.assert.calledWith(res.json, { success: true, message: "Modified 1 documents." });
             done();
         }, 500);
     });

@@ -71,12 +71,12 @@ describe('user routes', function () {
         });
 
 
-        it('should return a 200 on DELETE /users', function (done) {
+        it('should return a 202 on DELETE /users', function (done) {
             const id = users[1]._id;
 
             auth.login(users[0]).then((res) => {
                 request.delete(`/users/${id}`).set('x-access-token', res.body.token)
-                    .expect(200)
+                    .expect(202)
                     .end((err, res) => {
                         expect(err).to.not.exist;
                         expect(res.body).have.property('success');
@@ -88,7 +88,7 @@ describe('user routes', function () {
             });
         });
 
-        it('should return a 200 on POST /users', function (done) {
+        it('should return a 201 on POST /users', function (done) {
 
             const user = {
                 email: "_" + users[0].email,
@@ -101,7 +101,7 @@ describe('user routes', function () {
                 request.post('/users').set('x-access-token', res.body.token)
                     .set('Content-Type', 'application/json')
                     .send(user)
-                    .expect(200)
+                    .expect(201)
                     .end((err, res) => {
                         expect(err).to.not.exist;
                         expect(res.body).have.property('success');

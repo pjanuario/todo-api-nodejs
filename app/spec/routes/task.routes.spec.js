@@ -104,13 +104,13 @@ describe('task routes', function () {
             });
     });
 
-    it('should return a 200 on POST /tasks', function (done) {
+    it('should return a 201 on POST /tasks', function (done) {
 
         auth.login(users[0]).then((res) => {
             request.post('/tasks').set('x-access-token', res.body.token)
                 .set('Content-Type', 'application/json')
                 .send(tasks[0])
-                .expect(200)
+                .expect(201)
                 .end((err, res) => {
                     expect(err).to.not.exist;
                     expect(res.body).have.property('success');
@@ -121,12 +121,12 @@ describe('task routes', function () {
         });
     });
 
-    it('should return a 200 on DELETE /tasks', function (done) {
+    it('should return a 202 on DELETE /tasks', function (done) {
         const id = tasks[1]._id;
 
         auth.login(users[0]).then((res) => {
             request.delete(`/tasks/${id}`).set('x-access-token', res.body.token)
-                .expect(200)
+                .expect(202)
                 .end((err, res) => {
                     expect(err).to.not.exist;
                     expect(res.body).have.property('success');

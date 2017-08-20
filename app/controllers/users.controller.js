@@ -51,7 +51,7 @@ class UsersController {
             });
 
             user.save().then((user) => {
-                res.json({ success: true, id: user.id })
+                res.status(201).json({ success: true, id: user.id })
             }).catch((err) => {
                 logger.error(`Error creating user ${user.firstName}: ${err.message}`);
                 res.status(400).json({ success: false, message: err.message });
@@ -63,7 +63,7 @@ class UsersController {
         User.findOneAndRemove({ _id: req.params.id })
             .then((user) => {
                 if (user) {
-                    res.json({ success: true, id: user.id });
+                    res.status(202).json({ success: true, id: user.id });
                 } else {
                     logger.debug(`User ${req.params.id} not found.`)
                     res.status(404).json({ success: false, message: `User ${req.params.id} not found.` });

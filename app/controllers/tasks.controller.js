@@ -45,7 +45,7 @@ class TasksController {
         });
 
         task.save().then((task) => {
-            res.json({ success: true, id: task.id })
+            res.status(201).json({ success: true, id: task.id })
         }).catch((err) => {
             logger.error(`Error creating task ${task.name}: ${err.message}`);
             res.status(400).json({ success: false, message: err.message });
@@ -53,12 +53,12 @@ class TasksController {
     }
 
     deleteById(req, res, next) {
-        const {id} = req.params;
+        const { id } = req.params;
 
         Task.findOneAndRemove({ _id: id })
             .then((task) => {
                 if (task) {
-                    res.json({ success: true, id: task.id });
+                    res.status(202).json({ success: true, id: task.id });
                 } else {
                     logger.debug(`Task ${id} not found.`);
                     res.status(404).json({ success: false, message: `Task ${id} not found.` });
@@ -68,6 +68,18 @@ class TasksController {
                 logger.error(`Error deleting user ${id}`);
                 res.status(500).json({ success: false, message: err.message });
             });
+    }
+
+    updateById(req, res, next) {
+        const { id } = req.params;
+        const updates = req.body;
+
+        Task.update({ "_id": id }, updates).then((count) => {
+            res.status(202).json({ success: true, message: `Modified ${count} documents.` });
+        }).catch((err) => {
+            logger.error(`Error updating task: ${id}`);
+            res.status(500).json({ success: false, message: `Error updating task: ${id}` });
+        });
     }
 };
 
