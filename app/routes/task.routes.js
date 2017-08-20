@@ -27,4 +27,16 @@ router.route('/:id').get(TaskCtrl.find);
    */
 router.route('/').get(TaskCtrl.list);
 
+
+  /**
+   * @swagger
+   * /:
+   *   post:
+   *     description: Creates a new task in the system.
+   *     responses:
+   *       200:
+   *         description: Returns 200 with sucess if the task was created.
+   */
+router.route('/').post(TaskCtrl.create);
+
 module.exports = router;

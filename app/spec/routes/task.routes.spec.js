@@ -103,4 +103,21 @@ describe('task routes', function () {
                 done();
             });
     });
+
+    it('should return a 200 on POST /tasks', function (done) {
+
+        auth.login(users[0]).then((res) => {
+            request.post('/tasks').set('x-access-token', res.body.token)
+                .set('Content-Type', 'application/json')
+                .send(tasks[0])
+                .expect(200)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body).have.property('success');
+                    expect(res.body.success).to.be.equal(true);
+                    expect(res.body).have.property('id');
+                    done();
+                });
+        });
+    });
 });
