@@ -1,5 +1,5 @@
 'use strict';
-const authCtrl = require("../controllers/auth.controller");
+const AuthCtrl = require("../controllers/auth.controller");
 
 const router = require('express').Router();
 
@@ -12,6 +12,6 @@ const router = require('express').Router();
    *       200:
    *         description: Returns a JWT token to be used in secured endpoints as Header.
    */
-router.route('/').post(authCtrl.authenticate);
+router.route('/').post(AuthCtrl.authenticate);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 'use strict';
 
-const usersCtrl = require("../controllers/users.controller");
+const UsersCtrl = require("../controllers/users.controller");
 const express = require('express');
 
 const router = express.Router();
@@ -14,7 +14,7 @@ const router = express.Router();
    *       200:
    *         description: A user json object.
    */
-router.route('/:id').get(usersCtrl.find);
+router.route('/:id').get(UsersCtrl.find);
 
   /**
    * @swagger
@@ -25,7 +25,7 @@ router.route('/:id').get(usersCtrl.find);
    *       200:
    *         description: A lis of task JSON objects.
    */
-router.route('/').get(usersCtrl.list);
+router.route('/').get(UsersCtrl.list);
 
   /**
    * @swagger
@@ -36,7 +36,7 @@ router.route('/').get(usersCtrl.list);
    *       200:
    *         description: Returns 200 with sucess if the user was created.
    */
-router.route('/').post(usersCtrl.create);
+router.route('/').post(UsersCtrl.create);
 
   /**
    * @swagger
@@ -47,6 +47,6 @@ router.route('/').post(usersCtrl.create);
    *       200:
    *         description: Returns 200 with sucess if the user was deleted.
    */
-router.route('/:id').delete(usersCtrl.deleteById);
+router.route('/:id').delete(UsersCtrl.deleteById);
 
 module.exports = router;

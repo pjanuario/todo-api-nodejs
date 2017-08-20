@@ -39,4 +39,15 @@ router.route('/').get(TaskCtrl.list);
    */
 router.route('/').post(TaskCtrl.create);
 
+  /**
+   * @swagger
+   * /:
+   *   delete:
+   *     description: Deletes a task from the system.
+   *     responses:
+   *       200:
+   *         description: Returns 200 with sucess if the task was deleted.
+   */
+router.route('/:id').delete(TaskCtrl.deleteById);
+
 module.exports = router;

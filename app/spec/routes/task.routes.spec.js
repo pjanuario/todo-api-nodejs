@@ -120,4 +120,36 @@ describe('task routes', function () {
                 });
         });
     });
+
+    it('should return a 200 on DELETE /tasks', function (done) {
+        const id = tasks[1]._id;
+
+        auth.login(users[0]).then((res) => {
+            request.delete(`/tasks/${id}`).set('x-access-token', res.body.token)
+                .expect(200)
+                .end((err, res) => {
+                    expect(err).to.not.exist;
+                    expect(res.body).have.property('success');
+                    expect(res.body.success).to.be.equal(true);
+                    expect(res.body).have.property('id');
+                    expect(res.body.id).to.be.equal(id);
+                    done();
+                });
+        });
+    });
+
+    it('should return a 404 on DELETE /tasks', function (done) {
+        const id = '59943ddeca729e3398985ea7'; //Non existent id
+
+        auth.login(users[0]).then((res) => {
+            request.delete(`/tasks/${id}`).set('x-access-token', res.body.token)
+                .expect(404)
+                .end((err, res) => {
+                    expect(res.body).have.property('success');
+                    expect(res.body.success).to.be.equal(false);
+                    expect(res.body).have.property('message');
+                    done();
+                });
+        });
+    });
 });
