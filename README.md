@@ -40,7 +40,7 @@ To implement the REST API just fork the repository and open a new pull request f
 2. docker run -d -p<host_free_port>:8081 armandorvila/todo-api:latest
 
 # Docs
-1. Postman: https://documenter.getpostman.com/view/2598716/kpn-todo-api/6n8wrPP
+1. Postman: https://documenter.getpostman.com/view/2598716/todo-api/6n8wrPP
 2. Swagger spec: http://ec2-54-77-44-77.eu-west-1.compute.amazonaws.com/docs
 
 # Deployment
