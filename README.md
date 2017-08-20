@@ -16,8 +16,8 @@ To implement the REST API just fork the repository and open a new pull request f
 2. As a user I should be able to add a new item.
 3. As a user I should be able to remove a new item.
 4. As a user I should be able to modify a existent item.
-5. As a user I should be able to set a priority on a item.
-6. As a user I should be able to set a due date on a item.
+5. As a user I should be able to set a priority on a item. => It's covered by feture 4.
+6. As a user I should be able to set a due date on a item. => It's covered by feture 4.
 7. As a user I should be able to sort my todo list by due date.
 8. As a user I should be able to sort my todo list by priority.
 9. As a user I should be able to set a item as completed.
