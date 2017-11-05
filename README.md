@@ -14,12 +14,12 @@ To implement the REST API just fork the repository and open a new pull request f
 1. As a user I should be able to add a new item.
 2. As a user I should list my todo items.
 3. As a user I should be able to remove a new item.
-4. As a user I should be able to modify a existent item.
-5. As a user I should be able to set a priority on a item.
-6. As a user I should be able to set a due date on a item.
+4. As a user I should be able to modify an existent item.
+5. As a user I should be able to set a priority on an item.
+6. As a user I should be able to set a due date on an item.
 7. As a user I should be able to sort my todo list by due date.
 8. As a user I should be able to sort my todo list by priority.
-9. As a user I should be able to set a item as completed.
+9. As a user I should be able to set an item as completed.
 10. As a user I should be able to assign a task to another user using github id.
 11. As a user I should be able to list tasks assigned to a github user
 
