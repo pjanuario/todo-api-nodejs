@@ -9,6 +9,9 @@ const todoSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  due: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model('Todo', todoSchema);
