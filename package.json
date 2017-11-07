@@ -2,7 +2,7 @@
   "name": "todo-api-nodejs",
   "version": "1.0.0",
   "description": "A REST API server to manage user tasks lists using MongoDB",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +22,17 @@
   "bugs": {
     "url": "https://github.com/alFReD-NSH/todo-api-nodejs/issues"
   },
-  "homepage": "https://github.com/alFReD-NSH/todo-api-nodejs#readme"
+  "homepage": "https://github.com/alFReD-NSH/todo-api-nodejs#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "eslint": "^4.10.0",
+    "express": "^4.16.2",
+    "express-promise-router": "^2.0.0",
+    "loglevel": "^1.5.1"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  }
 }
