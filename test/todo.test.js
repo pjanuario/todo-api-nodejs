@@ -14,7 +14,12 @@ describe('todo', () => {
         .then();
     });
     it('with an item', () => {
-      const obj = { text: 'sd', priority: 2, due: new Date().toISOString() };
+      const obj = {
+        text: 'sd',
+        priority: 2,
+        due: new Date().toISOString(),
+        assignee: 'farid',
+      };
       Todo.find = () => Promise.resolve([new Todo(obj)]);
       return request(app)
         .get('/todos')
