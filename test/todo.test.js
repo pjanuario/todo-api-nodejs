@@ -14,12 +14,13 @@ describe('todo', () => {
         .then();
     });
     it('with an item', () => {
-      Todo.find = () => Promise.resolve([new Todo({ text: 'sd' })]);
+      const obj = { text: 'sd', priority: 2 };
+      Todo.find = () => Promise.resolve([new Todo(obj)]);
       return request(app)
         .get('/todos')
         .send([])
         .expect(200)
-        .then(res => expect(res.body[0].text).toEqual('sd'));
+        .then(res => expect(res.body[0]).toMatchObject(obj));
     });
   });
 
