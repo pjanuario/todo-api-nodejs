@@ -22,6 +22,15 @@ describe('todo', () => {
         .expect(200)
         .then(res => expect(res.body[0]).toMatchObject(obj));
     });
+    it('with sort', () => {
+      const obj = { text: 'sd' };
+      Todo.find = jest.fn(() => Promise.resolve([new Todo(obj)]));
+      return request(app)
+        .get('/todos?sortBy=priority&sortDir=asc')
+        .send([])
+        .expect(200)
+        .then(() => expect(Todo.find).toBeCalledWith({}, null, { sort: { priority: 'asc' } }));
+    });
   });
 
   describe('create', () => {

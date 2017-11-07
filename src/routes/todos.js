@@ -8,14 +8,33 @@ const router = require('express-promise-router')();
  *     description: Returns a an array of Todo items
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - name: sortBy
+ *         description: The field to sort by
+ *         in: query
+ *         required: false
+ *         type: string
+ *       - name: sortDir
+ *         description: The sorting direction
+ *         in: query
+ *         required: false
+ *         default: asc
+ *         type: string
  *     responses:
  *       200:
  *         description: returns an array of Todo items
  *         schema:
  *           $ref: '#/definitions/Todo'
  */
-router.get('/', (req, res) =>
-  Todo.find().then(todos => res.status(200).send(todos)));
+
+router.get('/', (req, res) => {
+  const { sortBy, sortDir = 'asc' } = req.query || {};
+  const options = {};
+  if (sortBy) {
+    options.sort = { [sortBy]: sortDir };
+  }
+  return Todo.find({}, null, options).then(todos => res.status(200).send(todos));
+});
 
 /**
  * @swagger
