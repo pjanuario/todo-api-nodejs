@@ -20,6 +20,12 @@ const router = require('express-promise-router')();
  *         required: false
  *         default: asc
  *         type: string
+ *       - name: "*"
+ *         description: Matches given field with the given value
+ *         example: completed=true or asignee=alFReD-NSH
+ *         in: query
+ *         required: false
+ *         type: any
  *     responses:
  *       200:
  *         description: returns an array of Todo items
@@ -33,7 +39,14 @@ router.get('/', (req, res) => {
   if (sortBy) {
     options.sort = { [sortBy]: sortDir };
   }
-  return Todo.find({}, null, options).then(todos => res.status(200).send(todos));
+  const query = {};
+  const todoPaths = Todo.schema.paths;
+  for (const key in req.query) {
+    if (todoPaths.hasOwnProperty(key)) {
+      query[key] = todoPaths[key].cast(req.query[key]);
+    }
+  }
+  return Todo.find(query, null, options).then(todos => res.status(200).send(todos));
 });
 
 /**
