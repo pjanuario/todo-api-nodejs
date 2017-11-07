@@ -9,8 +9,10 @@ const todoSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  due: {
-    type: Date,
+  due: Date,
+  completed: {
+    type: Boolean,
+    default: false,
   },
 });
 
