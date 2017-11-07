@@ -62,4 +62,15 @@ describe('todo', () => {
         .then(() => expect(Todo.remove).toBeCalledWith({ _id: id }));
     });
   });
+  describe('Modify', () => {
+    it('simple update', () => {
+      Todo.findByIdAndUpdate = jest.fn(() => Promise.resolve());
+      const body = { text: '2' };
+      return request(app)
+        .put(`/todos/${id}`)
+        .send(body)
+        .expect(204)
+        .then(() => expect(Todo.findByIdAndUpdate).toBeCalledWith(id.toString(), { $set: body }));
+    });
+  });
 });

@@ -67,4 +67,30 @@ router.delete('/:id', (req, res) =>
     res.sendStatus(204);
   }));
 
+/**
+ * @swagger
+ * /todos/{id}:
+ *   put:
+ *     description: modify a Todo item
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Todo id
+ *         in: path
+ *         required: true
+ *         type: ObjectId
+ *       - name: todo
+ *         description: A complete or partial Todo object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Todo'
+ *     responses:
+ *       204:
+ *         description: Success
+ */
+router.put('/:id', (req, res) =>
+  Todo.findByIdAndUpdate(req.params.id, { $set: req.body }).then(() => res.sendStatus(204)));
+
 module.exports = router;
