@@ -38,5 +38,33 @@ router.get('/', (req, res) =>
 router.post('/', (req, res) =>
   Todo.create(req.body).then(todo => res.status(201).send(todo)));
 
+/**
+ * @swagger
+ * /todos/{id}:
+ *   delete:
+ *     description: deletes a Todo item
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: id
+ *         description: Todo id
+ *         in: path
+ *         required: true
+ *         type: ObjectId
+ *     responses:
+ *       204:
+ *         description: Success
+ *       404:
+ *         description: Not found!
+ */
+router.delete('/:id', (req, res) =>
+  Todo.remove({ _id: req.params.id }).then(({ result }) => {
+    console.log(result);
+    if (result.n === 0) {
+      res.sendStatus(404);
+      return;
+    }
+    res.sendStatus(204);
+  }));
 
 module.exports = router;

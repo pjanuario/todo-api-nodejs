@@ -3,6 +3,7 @@ const app = require('./..');
 const Todo = require('../src/models/todo');
 
 describe('todo', () => {
+  const id = '5a0134472b67ca0d28b1672f';
   describe('list', () => {
     it('empty', () => {
       Todo.find = () => Promise.resolve([]);
@@ -44,5 +45,21 @@ describe('todo', () => {
         .send({})
         .expect(400)
         .then());
+  });
+  describe('delete', () => {
+    it('simple', () => {
+      Todo.remove = jest.fn(() => Promise.resolve({ result: { n: 1 } }));
+      return request(app)
+        .delete(`/todos/${id}`)
+        .expect(204)
+        .then(() => expect(Todo.remove).toBeCalledWith({ _id: id }));
+    });
+    it('not found', () => {
+      Todo.remove = jest.fn(() => Promise.resolve({ result: { n: 0 } }));
+      return request(app)
+        .delete(`/todos/${id}`)
+        .expect(404)
+        .then(() => expect(Todo.remove).toBeCalledWith({ _id: id }));
+    });
   });
 });
