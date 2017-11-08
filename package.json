@@ -30,10 +30,14 @@
     "express": "^4.16.2",
     "express-promise-router": "^2.0.0",
     "loglevel": "^1.5.1",
-    "mongoose": "^4.13.0"
+    "mongoose": "^4.13.0",
+    "mongoose-to-swagger": "0.0.2",
+    "supertest": "^3.0.0",
+    "swagger-jsdoc": "^1.9.7"
   },
   "devDependencies": {
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "jest": "^21.2.1"
   }
 }
