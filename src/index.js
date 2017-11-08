@@ -10,7 +10,8 @@ const mongoose = require('mongoose');
 const dbUri = process.env.DATABASE || 'mongodb://localhost/test';
 const port = process.env.PORT || DEFAULT_PORT;
 
-mongoose.connect(dbUri, (err) => {
+mongoose.Promise = Promise;
+mongoose.connect(dbUri, { useMongoClient: true }, (err) => {
   if (err) {
     throw err;
   }
