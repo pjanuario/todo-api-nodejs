@@ -91,7 +91,6 @@ router.post('/', (req, res) =>
  */
 router.delete('/:id', (req, res) =>
   Todo.remove({ _id: req.params.id }).then(({ result }) => {
-    console.log(result);
     if (result.n === 0) {
       res.sendStatus(404);
       return;
